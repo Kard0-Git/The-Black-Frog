@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class SoundClass : MonoBehaviour
+public class SoundClass 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Class for the properties of a sound
+    // each sound will be referenced by the AudioManager
+    
 }

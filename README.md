@@ -1,0 +1,1 @@
+A 2D SideScroller Shooter where you player as a Black coloured frog. Your goal is to fight you way through hords of flies and other creatures. Your hunger will go down constantly so you will need to eat what you find around you to stay satiated for a time. Stay too long without eating and your health will slowly tick down if they dont get to you.

@@ -116,9 +116,9 @@ TextureImporter:
       name: FrogChewingAnimation_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 18
+        width: 20
         height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -130,6 +130,94 @@ TextureImporter:
       bones: []
       spriteID: d017e5b5689158e90800000000000000
       internalID: -7024179978965192435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogChewingAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 0
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f1514209b7315449e002b8a879e166
+      internalID: -2097506636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogChewingAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e87ff34bf1e05fa458f6594fc9211a75
+      internalID: 113460556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogChewingAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 0
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d29c1d396092948a6cd539e7dd0cc1
+      internalID: -1558142091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogChewingAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e033c5e001de041a5df77ca46efaf5
+      internalID: -2005328329
       vertices: []
       indices: 
       edges: []
@@ -149,6 +237,10 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       FrogChewingAnimation_0: -7024179978965192435
+      FrogChewingAnimation_1: -2097506636
+      FrogChewingAnimation_2: 113460556
+      FrogChewingAnimation_3: -1558142091
+      FrogChewingAnimation_4: -2005328329
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

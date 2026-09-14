@@ -7,7 +7,8 @@ public class FrogMovenment : MonoBehaviour
     public float speed;
 
     public GameObject left,right,ceiling,floor;
-
+    
+    Animator animator;
   
 
     public float offset;
@@ -16,7 +17,7 @@ public class FrogMovenment : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        animator = FindAnyObjectByType<Animator>();
     }
 
     // Update is called once per frame
@@ -37,26 +38,53 @@ public class FrogMovenment : MonoBehaviour
 
     void MoveFrog()
     {
+        
         if (Input.GetKey(KeyCode.W))
         {
             Movenment(Vector2.up);
+            animator.SetBool("IsMoving", true);
        
         }
 
+      else if (Input.GetKeyUp(KeyCode.W))
+        {
+            animator.SetBool("IsMoving",false);
+        }
+        
         if (Input.GetKey(KeyCode.A))
         {
             Movenment(Vector2.left);
+            animator.SetBool("IsMoving",true);
         }
-
+         else if (Input.GetKeyUp(KeyCode.A))
+        {
+            animator.SetBool("IsMoving",false);
+        }
+        
         if (Input.GetKey(KeyCode.S))
         {
             Movenment(Vector2.down);
+            animator.SetBool("IsMoving",true);
         }
+         else if (Input.GetKeyUp(KeyCode.S))
+        {
+            animator.SetBool("IsMoving",false);
+        }
+         
 
         if (Input.GetKey(KeyCode.D))
         {
             Movenment(Vector2.right);
+            animator.SetBool("IsMoving",true);
         }
+         else if (Input.GetKeyUp(KeyCode.D))
+        {
+            animator.SetBool("IsMoving",false);
+        }
+// If we are not moving play idle animation
+       
+
+     
     }
 
 

@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 232792343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.3, y: -24.1, z: 0}
+  m_LocalPosition: {x: -50.3, y: -32.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -500,8 +500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34ee7d211b9d648a35342d8ab6ac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEnemies
-  countdown: 1
-  tickrate: 1
+  countdown: 3
+  tickrate: 3
   Enemy: {fileID: 3162402651055448312, guid: ea77c309951f84a42a08e0c2c385e0b5, type: 3}
   EnemyCount: []
   EnemySpawnLimit: 6
@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &304831599
 Transform:
   m_ObjectHideFlags: 0
@@ -535,8 +535,8 @@ Transform:
   m_GameObject: {fileID: 304831598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.919, y: 1.7142, z: 0}
-  m_LocalScale: {x: 76.08209, y: 1.2210832, z: 1}
+  m_LocalPosition: {x: -8.1386, y: 9.1, z: 0}
+  m_LocalScale: {x: 80.31343, y: 1.2210832, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 430320281}
@@ -591,7 +591,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1230da9368d2d6646a4966783b20ad31, type: 3}
-  m_Color: {r: 0.102394104, g: 0.5376783, b: 0.5566038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -867,7 +867,7 @@ Transform:
   m_GameObject: {fileID: 444857779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68, y: -24.5, z: 0}
+  m_LocalPosition: {x: 75.4, y: -31.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -944,8 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34ee7d211b9d648a35342d8ab6ac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEnemies
-  countdown: 1
-  tickrate: 1
+  countdown: 3
+  tickrate: 3
   Enemy: {fileID: 3162402651055448312, guid: ea77c309951f84a42a08e0c2c385e0b5, type: 3}
   EnemyCount: []
   EnemySpawnLimit: 6
@@ -1111,7 +1111,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1820,10 +1820,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.125, y: 1.125}
+    newSize: {x: 1.125, y: 1.125}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -2110,12 +2110,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 1230da9368d2d6646a4966783b20ad31, type: 3}
-  m_Color: {r: 0.47058824, g: 0.4226374, b: 0.09411764, a: 1}
+  m_Sprite: {fileID: 186361156259027176, guid: 4948ec6a120e9f74090a2bddc0472aba, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 2
+  m_Size: {x: 1.0512373, y: 1.0823017}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2129,7 +2129,7 @@ Transform:
   m_GameObject: {fileID: 909348413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1058, y: 0.3174, z: 0}
   m_LocalScale: {x: 95, y: 90, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2456,7 +2456,7 @@ Transform:
   m_GameObject: {fileID: 1432495030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.6, y: 64.8, z: 0}
+  m_LocalPosition: {x: -52.3, y: 67.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2533,8 +2533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34ee7d211b9d648a35342d8ab6ac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEnemies
-  countdown: 1
-  tickrate: 1
+  countdown: 3
+  tickrate: 3
   Enemy: {fileID: 3162402651055448312, guid: ea77c309951f84a42a08e0c2c385e0b5, type: 3}
   EnemyCount: []
   EnemySpawnLimit: 6
@@ -2558,7 +2558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1433829572
 Transform:
   m_ObjectHideFlags: 0
@@ -2568,8 +2568,8 @@ Transform:
   m_GameObject: {fileID: 1433829571}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -45.429, y: -34.9775, z: 0}
-  m_LocalScale: {x: 73.265, y: 1.2680349, z: 1}
+  m_LocalPosition: {x: -48.0434, y: -33.5408, z: 0}
+  m_LocalScale: {x: 86.52759, y: 0.81367797, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 430320281}
@@ -2621,10 +2621,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1230da9368d2d6646a4966783b20ad31, type: 3}
-  m_Color: {r: 0.102394104, g: 0.5376783, b: 0.5566038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2737,7 +2737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1572141696
 Transform:
   m_ObjectHideFlags: 0
@@ -2747,8 +2747,8 @@ Transform:
   m_GameObject: {fileID: 1572141695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 29.5654, y: -34.8553, z: 0}
-  m_LocalScale: {x: 73.265, y: 1.2680349, z: 1}
+  m_LocalPosition: {x: 32.7764, y: -33.3918, z: 0}
+  m_LocalScale: {x: 86.49198, y: 1.3306329, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 430320281}
@@ -2800,10 +2800,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1230da9368d2d6646a4966783b20ad31, type: 3}
-  m_Color: {r: 0.102394104, g: 0.5376783, b: 0.5566038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3191,6 +3191,7 @@ GameObject:
   - component: {fileID: 1745055281}
   - component: {fileID: 1745055280}
   - component: {fileID: 1745055283}
+  - component: {fileID: 1745055284}
   m_Layer: 0
   m_Name: FrogRotation
   m_TagString: Untagged
@@ -3247,12 +3248,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -616816253467886380, guid: 9557aa1cacca45847b84c627057d3314, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b91b62fc8cfffe9438cc850788302449, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3285,6 +3286,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ec66f8a57cfe443a590d216785eef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotatePivot
+--- !u!95 &1745055284
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745055279}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f91eee481cdbef439faa312f7c91e10, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1745069551
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,7 +3760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2024571384
 Transform:
   m_ObjectHideFlags: 0
@@ -3747,8 +3770,8 @@ Transform:
   m_GameObject: {fileID: 2024571383}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.9443, y: -71.1562, z: 0}
-  m_LocalScale: {x: 76.08209, y: 1.2210832, z: 1}
+  m_LocalPosition: {x: -8.1623, y: -76.1, z: 0}
+  m_LocalScale: {x: 81.72244, y: 1.2210832, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 430320281}
@@ -3800,10 +3823,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1230da9368d2d6646a4966783b20ad31, type: 3}
-  m_Color: {r: 0.102394104, g: 0.5376783, b: 0.5566038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3924,7 +3947,7 @@ Transform:
   m_GameObject: {fileID: 2122095624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.4, y: 63.3, z: 0}
+  m_LocalPosition: {x: 74.2, y: 67.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4001,8 +4024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34ee7d211b9d648a35342d8ab6ac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnEnemies
-  countdown: 1
-  tickrate: 1
+  countdown: 3
+  tickrate: 3
   Enemy: {fileID: 3162402651055448312, guid: ea77c309951f84a42a08e0c2c385e0b5, type: 3}
   EnemyCount: []
   EnemySpawnLimit: 6

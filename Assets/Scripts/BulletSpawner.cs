@@ -20,10 +20,13 @@ public class BulletSpawner : MonoBehaviour
 
   HungerBarDecriment hungerBar;
 
+  Animator animator;
+
   void Start()
     {
         ammoText = FindAnyObjectByType<GameTextHandler>();
         hungerBar = FindAnyObjectByType<HungerBarDecriment>();
+        animator = FindAnyObjectByType<Animator>();
     }
 
 
@@ -39,7 +42,15 @@ public class BulletSpawner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+
             EatBullets();
+
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            animator.SetBool("IsEating",false);
         }
     }
 
@@ -83,15 +94,23 @@ public class BulletSpawner : MonoBehaviour
 
  void EatBullets()
     {
-       AmmoCollection.RemoveAt(AmmoCollection.Count - 1 );
-       ammoText.DecrimentAmmo();
+       if(CheckforRange == false)
+        {
+         AmmoCollection.RemoveAt(AmmoCollection.Count - 1 );
+         ammoText.DecrimentAmmo();
+         hungerBar.RefillHunger();
+         animator.SetBool("IsEating",true);
 
-       hungerBar.RefillHunger();
+     
+        }
+      
+      
 
        
         if(AmmoCollection.Count <= 0)
         {
             CheckforRange = true;
+
           
 
         } else

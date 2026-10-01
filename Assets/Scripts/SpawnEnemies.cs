@@ -17,7 +17,7 @@ public class SpawnEnemies : MonoBehaviour
 
     public Transform EnemyAmount;
 
-    bool StopEnemySpawn = false;
+   public bool StopEnemySpawn = false;
 
     GameTextHandler gameTextHandler;
     CheckEnemyAmount CheckEnemyAmount;
@@ -39,7 +39,7 @@ public class SpawnEnemies : MonoBehaviour
     }
 
 
-    void spawnEnemies()
+    public void spawnEnemies()
     {
 
         if (!StopEnemySpawn)
@@ -53,14 +53,8 @@ public class SpawnEnemies : MonoBehaviour
             EnemyCount.Add(Enemy);
             gameTextHandler.CountEnemies();
 
-          
-
-
+        
         }
-
-         
-
-
 
         }
         
@@ -77,9 +71,12 @@ public class SpawnEnemies : MonoBehaviour
              if(EnemyAmount.childCount <= 0)
                 {
                 CheckEnemyAmount.CheckEnemyCount();
+
                 }
         }
     }
+
+ 
 
     
 

@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BulletSpawner : MonoBehaviour
 {
   public float cooldown;
 
-  public float tickspeed;
+ public float lastShotFired;
 
   public GameObject Bullet;
   public List<GameObject> AmmoCollection;
@@ -21,6 +23,13 @@ public class BulletSpawner : MonoBehaviour
   HungerBarDecriment hungerBar;
 
   Animator animator;
+
+  HealthScript AddOnHealth;
+
+  UpgradeHandler Upgrades;
+  
+
+  public Button UpgradeOneButton;
 
   void Start()
     {
@@ -62,9 +71,15 @@ public class BulletSpawner : MonoBehaviour
 //SpawnBullets if there are bullets in our array and only if the RMB is pressed
     public void SpawnBullets()
     {
-        
+        //Only Fire a shot after the cooldown
+        if(Time.time - lastShotFired < cooldown)
+        {
+            return;
+        }
+
        if(CheckforRange == false)
         {
+          lastShotFired = Time.time;
              for(int i = 0; i<AmmoCollection.Count; i++)
         {
             Instantiate(AmmoCollection[i],transform.position,transform.rotation,BulletsFired);
@@ -72,6 +87,7 @@ public class BulletSpawner : MonoBehaviour
        
         AmmoCollection.RemoveAt(AmmoCollection.Count - 1);
         ammoText.DecrimentAmmo();
+        FindAnyObjectByType<AudioManager>().PlaySounds("ShootBin");
 
 
         }
@@ -99,14 +115,19 @@ public class BulletSpawner : MonoBehaviour
          AmmoCollection.RemoveAt(AmmoCollection.Count - 1 );
          ammoText.DecrimentAmmo();
          hungerBar.RefillHunger();
+         FindAnyObjectByType<AudioManager>().PlaySounds("ChewingAmmo");
          animator.SetBool("IsEating",true);
 
-     
-        }
-      
-      
 
-       
+         AddOnHealth = FindAnyObjectByType<HealthScript>();
+
+         Upgrades = FindAnyObjectByType<UpgradeHandler>();
+
+         AddOnHealth.GainHealth();
+   
+        }
+
+ 
         if(AmmoCollection.Count <= 0)
         {
             CheckforRange = true;
@@ -121,4 +142,6 @@ public class BulletSpawner : MonoBehaviour
 
         
     }
+
+    
 }

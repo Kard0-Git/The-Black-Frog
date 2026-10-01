@@ -1,8 +1,20 @@
 using UnityEngine;
 
-public class SoundClass 
+[System.Serializable]
+public class SoundClass
 {
-    //Class for the properties of a sound
-    // each sound will be referenced by the AudioManager
-    
+    public string name;
+    public AudioClip clip;
+
+    [Range (0f,1f)]
+    public float volume;
+
+    [HideInInspector]
+    public AudioSource source;
+    public bool loopSound;
+
+    [Range (0f,1f)]
+
+    public float pitch;
+
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4161573513819595422}
   - component: {fileID: 1701952666378474374}
   - component: {fileID: -1575680221014155323}
+  - component: {fileID: 4957222890965272914}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -152,7 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3d3059f8b09da4eb01474bd8a231e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour
-  EnemySpeed: 2
+  EnemySpeed: 7
+  SmallEnemiesDmg: 0.2
 --- !u!50 &-1575680221014155323
 Rigidbody2D:
   serializedVersion: 5
@@ -180,3 +182,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!95 &4957222890965272914
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3162402651055448312}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4ba54411b2404544b49eec2b6fced72, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

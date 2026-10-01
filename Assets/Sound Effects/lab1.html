@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Department of Computing" />
+  <title>Lab 1: SSH, Static Pages, and Your First Dynamic Server</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lab 1: SSH, Static Pages, and Your First Dynamic
+Server</h1>
+<p class="author">Department of Computing</p>
+<p class="date">Autumn Term</p>
+</header>
+<style>
+  :root, html {
+    background-color: #0d1117 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body {
+    background-color: #0d1117 !important;
+    color: #e6edf3 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 900px;
+    margin: 0 auto !important;
+    padding: 48px 24px 80px 24px !important;
+    box-sizing: border-box;
+  }
+  h1, h2, h3 {
+    color: #58a6ff;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 0.3em;
+  }
+  h1 { font-size: 2.2em; }
+  h2 { font-size: 1.6em; margin-top: 1.6em; }
+  h3 { font-size: 1.25em; color: #79c0ff; }
+  a, a:link, a:visited, blockquote a {
+    color: #58a6ff !important;
+    text-decoration: underline !important;
+  }
+  a:hover {
+    color: #a5d6ff !important;
+  }
+  code {
+    background-color: #161b22;
+    color: #ff9b5e;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  pre {
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+  }
+  pre code {
+    background-color: transparent !important;
+    color: #e6edf3 !important;
+    padding: 0 !important;
+  }
+  blockquote {
+    border-left: 4px solid #1f6feb;
+    background-color: #161b22;
+    padding: 12px 18px;
+    margin: 1.2em 0;
+    color: #c9d1d9;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: #30363d;
+    margin: 2.5em 0;
+  }
+</style>
+<h2 id="learning-goals">Learning goals</h2>
+<p>By the end of this lab you will be able to:</p>
+<ul>
+<li>Connect to a remote Unix server over SSH</li>
+<li>Publish a static web page from your home directory using
+<code>public_html</code></li>
+<li>Provision and configure your own personal virtual server</li>
+<li>Run a minimal Python static file server to serve files over port
+80</li>
+<li>Explain the difference between a <strong>static</strong> page
+(served as-is from disk) and a <strong>dynamic</strong> page (generated
+by a running program on each request)</li>
+<li>Run a minimal Python program that generates HTML dynamically</li>
+</ul>
+<hr />
+<h2 id="part-a-the-shared-department-server">Part A: The shared
+department server</h2>
+<h3 id="a1.-connect-over-ssh">A1. Connect over SSH</h3>
+<p>From a terminal:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> username@doc.gold.ac.uk</span></code></pre></div>
+<p>Replace <code>username</code> with your own intranet username. Enter
+your password when prompted.</p>
+<blockquote>
+<p><strong>Need a refresher on SSH keys and remote shells?</strong>
+Check out <a
+href="https://www.digitalocean.com/community/tutorials/ssh-essentials-working-with-ssh-servers-clients-and-keys">DigitalOcean’s
+SSH Essentials Guide</a> or the <a
+href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Solve_common_problems/SSH_keys">MDN
+Guide to SSH Keys</a>.</p>
+</blockquote>
+<h3 id="a2.-create-your-public-web-folder">A2. Create your public web
+folder</h3>
+<p>Every user has a special folder, <code>public_html</code>, which
+Apache automatically serves at a personal URL.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> public_html</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 public_html</span></code></pre></div>
+<blockquote>
+<p><strong>Why 755, not 644?</strong> A directory needs its
+<em>execute</em> bit set for anyone to be able to look inside it
+(<code>cd</code> into it or have Apache read files from it).
+<code>755</code> (<code>rwxr-xr-x</code>) means: you can
+read/write/enter it, everyone else can only read/enter it.
+<code>644</code> is the right permission for the <strong>file</strong>
+you’re about to create inside it — files don’t need to be “entered,”
+just read.</p>
+<p><strong>Deep dive on Unix permissions:</strong> - Experiment with the
+interactive <a href="https://chmod-calculator.com/">Chmod Calculator</a>
+to see visual bitwise breakdowns (<span
+class="math inline"><em>r</em> = 4, <em>w</em> = 2, <em>x</em> = 1</span>).
+- Read <a
+href="https://www.redhat.com/sysadmin/linux-file-permissions-explained">Red
+Hat’s Linux File Permissions 101</a> to understand <code>chmod</code>,
+<code>chown</code>, and octal notation. - Read the <a
+href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403">MDN
+403 Forbidden Explained</a> documentation to see how web servers respond
+to OS-level permission failures.</p>
+</blockquote>
+<h3 id="a3.-create-a-basic-page">A3. Create a basic page</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> public_html</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> index.html</span></code></pre></div>
+<p>Paste in a minimal page:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>My First Page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Hello from the shared server!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This is a static page — it never changes unless I edit the file.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>Save and exit, then set the file permission:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 index.html</span></code></pre></div>
+<h3 id="a4.-view-it-in-a-browser">A4. View it in a browser</h3>
+<p>Visit your department URL:</p>
+<p><code>&lt;https://doc.gold.ac.uk/~username/&gt;</code></p>
+<p><em>(Replace <code>username</code> with your own login
+name).</em></p>
+<p><strong>Checkpoint:</strong> If you see your page, Apache is
+correctly serving from <code>public_html</code>. If you get a 403
+Forbidden, double-check the permissions in A2/A3 — this is the single
+most common mistake.</p>
+<hr />
+<h2 id="part-b-your-own-personal-virtual-server">Part B: Your own
+personal virtual server</h2>
+<p>The shared server is fine for static files, but you don’t have admin
+rights on it — so you can’t install software or bind background programs
+to ports. For this and future labs, you’ll use your own <strong>personal
+virtual server</strong>, where you have full root access.</p>
+<p>Rather than dealing with the overhead and configuration files of
+Apache, we will use Python’s built-in HTTP server to serve your static
+files directly.</p>
+<h3 id="b1.-create-the-server">B1. Create the server</h3>
+<ol type="1">
+<li>Go to the Virtual Server Manager: <a
+href="https://www2.doc.gold.ac.uk/dept/VirtualServer"
+class="uri">https://www2.doc.gold.ac.uk/dept/VirtualServer</a></li>
+<li>Fill in the form:
+<ul>
+<li><strong>Server ID</strong> — pick a free numeric ID (0–999)</li>
+<li><strong>Admin Username</strong> — pre-filled with your intranet
+username</li>
+<li><strong>Admin Password</strong> — set this now (unlike the CLI, the
+form lets you set it directly)</li>
+<li><strong>Operating System</strong> — e.g. <code>ubuntu26</code></li>
+<li><strong>System Type</strong> — choose <strong>minimal</strong> for
+this lab</li>
+<li><strong>Disk / Memory / Processors</strong> — the defaults are fine
+to start</li>
+</ul></li>
+<li>Submit and wait for the status to show <code>running</code>.</li>
+</ol>
+<p>Note your <strong>Server ID</strong> — everything below depends on
+it.</p>
+<h3 id="b2.-connect-to-your-virtual-server">B2. Connect to your virtual
+server</h3>
+<p>Your SSH port is <code>2000 + ID</code>. For example, server ID
+<code>474</code> → port <code>2474</code>.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> yourusername@myserver.doc.gold.ac.uk <span class="at">-p</span> <span class="op">&lt;</span>2000+ID<span class="op">&gt;</span></span></code></pre></div>
+<p>From off-campus, you can instead tunnel through the SSH proxy using
+just your ID:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-t</span> yourusername@igor.gold.ac.uk myserver ssh <span class="op">&lt;</span>ID<span class="op">&gt;</span></span></code></pre></div>
+<blockquote>
+<p><strong>Host key warning?</strong> If your VM was re-provisioned with
+the same ID, SSH may warn that remote host identification has changed.
+Remove the old entry from your <code>known_hosts</code> file using
+<code>ssh-keygen -R "[myserver.doc.gold.ac.uk]:&lt;2000+ID&gt;"</code>
+(or on <code>igor</code> if connecting via the tunnel).</p>
+</blockquote>
+<h3 id="b3.-set-up-your-files-and-run-pythons-static-server">B3. Set up
+your files and run Python’s static server</h3>
+<p>Create your <code>public_html</code> folder and
+<code>index.html</code> file on your VM:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/public_html</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/public_html</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> index.html</span></code></pre></div>
+<p>Paste your HTML content (personalize it if you’d like):</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;en&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>VM Static Page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Hello from my personal virtual server!<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>This is a static page served directly by Python.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>Now, serve the contents of this directory on port 80:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> python3 <span class="at">-m</span> http.server 80</span></code></pre></div>
+<blockquote>
+<p><strong>Why <code>sudo</code>?</strong> Ports below 1024 are
+privileged in Unix-like systems. Binding to standard HTTP port 80
+requires administrative privileges.</p>
+</blockquote>
+<h3 id="b4.-view-it-in-a-browser">B4. View it in a browser</h3>
+<p>From off-campus (or anywhere via the HTTP proxy):</p>
+<p><code>&lt;http://www.doc.gold.ac.uk/www/&lt;ID&gt;/&gt;</code></p>
+<p><em>(Be sure to include the trailing slash <code>/</code> after your
+ID; do <strong>not</strong> add port numbers to the proxy URL).</em></p>
+<p>From on-campus, your web port is <code>8000 + ID</code>:</p>
+<p><code>&lt;http://myserver.doc.gold.ac.uk:&lt;8000+ID&gt;/&gt;</code></p>
+<p><strong>Checkpoint:</strong> You should see your static page. Look at
+your terminal: Python logs incoming HTTP requests in real time. Press
+<code>Ctrl+C</code> to stop the server when you are ready to move
+on.</p>
+<hr />
+<h2 id="part-c-making-it-dynamic">Part C: Making it dynamic</h2>
+<p>So far, every page has been a file sitting on disk — the server just
+reads it and sends it back unchanged. That’s a <strong>static</strong>
+page. A <strong>dynamic</strong> page is generated by a running
+<em>program</em> each time it’s requested, so the content can change
+based on time, input, or state.</p>
+<p>You have root on your virtual server, so you can run your own script
+listening on any port and construct responses programmatically.</p>
+<h3 id="c1.-a-minimal-dynamic-server-in-python">C1. A minimal dynamic
+server in Python</h3>
+<p>Copying and pasting Python code into terminal editors like
+<code>nano</code> often mangles the indentation, which causes
+<code>IndentationError</code> crashes.</p>
+<p>To avoid this, copy and run the entire block below directly into your
+SSH terminal from your home directory (<code>cd ~</code>). The
+<code>cat &lt;&lt; 'EOF'</code> construct writes the script verbatim to
+disk with all indentation intact:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; &#39;EOF&#39;</span> <span class="op">&gt;</span> dynamic_server.py</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">from http.server import BaseHTTPRequestHandler, HTTPServer</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">from datetime import datetime</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">visit_count = 0</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">class DynamicHandler(BaseHTTPRequestHandler):</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    def do_GET(self):</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">        global visit_count</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">        visit_count += 1</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">        now = datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="st">        html = f&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;html&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;head&gt;&lt;title&gt;Dynamic Page&lt;/title&gt;&lt;/head&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;body&gt;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;h1&gt;This page is generated by Python!&lt;/h1&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;p&gt;Server time: {now}&lt;/p&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;p&gt;Visitor count: {visit_count}&lt;/p&gt;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/body&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/html&gt;&quot;&quot;&quot;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="st">        self.send_response(200)</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="st">        self.send_header(&quot;Content-type&quot;, &quot;text/html; charset=utf-8&quot;)</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="st">        self.end_headers()</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="st">        self.wfile.write(html.encode(&quot;utf-8&quot;))</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="st">if __name__ == &quot;__main__&quot;:</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="st">    server = HTTPServer((&quot;0.0.0.0&quot;, 8000), DynamicHandler)</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="st">    print(&quot;Serving on 0.0.0.0:8000...&quot;)</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="st">    server.serve_forever()</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span></code></pre></div>
+<p>Run it:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> dynamic_server.py</span></code></pre></div>
+<h3 id="c2.-view-it-in-a-browser">C2. View it in a browser</h3>
+<p>This is running on your <strong>user port</strong>
+(<code>58000 + ID</code> from on-campus, or
+<code>/usr/&lt;ID&gt;/</code> via the proxy):</p>
+<p><code>&lt;http://www.doc.gold.ac.uk/usr/&lt;ID&gt;/&gt;</code></p>
+<p>Refresh the page a few times. Notice:</p>
+<ul>
+<li>The <strong>time</strong> updates on every request — the server
+computes it fresh each time.</li>
+<li>The <strong>visitor count</strong> goes up — the server holds state
+in memory between requests.</li>
+</ul>
+<p>Compare this to <code>index.html</code> from Part B, which never
+changes no matter how many times you reload it.</p>
+<h3 id="c3.-activity-extend-it-yourself">C3. Activity — extend it
+yourself</h3>
+<p>Open <code>dynamic_server.py</code> with
+<code>nano dynamic_server.py</code> (or edit locally and use
+<code>cat &lt;&lt; 'EOF' &gt; dynamic_server.py</code>).</p>
+<p>Pick <strong>at least two</strong> of the following challenges to
+implement:</p>
+<ol type="1">
+<li><p><strong>Random Dynamic Greeting:</strong> Use Python’s built-in
+<code>random.choice()</code> to pick from a list of greetings or quotes
+so visitors see a different one on every page refresh.</p>
+<ul>
+<li>Reference: <a
+href="https://docs.python.org/3/library/random.html">Python random
+module documentation</a></li>
+</ul></li>
+<li><p><strong>Client Headers &amp; Browser Fingerprinting:</strong>
+Read incoming HTTP headers using <code>self.headers</code>. Read
+<code>self.headers.get('User-Agent')</code> to report the user’s
+browser, or <code>self.client_address[0]</code> to echo their IP address
+back to them.</p>
+<ul>
+<li>Reference: <a
+href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">MDN
+HTTP Headers Reference</a></li>
+<li>Reference: <a
+href="https://docs.python.org/3/library/http.server.html">Python
+BaseHTTPRequestHandler documentation</a></li>
+</ul></li>
+<li><p><strong>Live Server Diagnostics:</strong> Use the standard Python
+<a href="https://docs.python.org/3/library/platform.html">platform</a>
+and <a href="https://docs.python.org/3/library/os.html">os</a> modules
+to read OS details and CPU load averages (<code>os.getloadavg()</code>).
+Display real-time machine stats directly in your HTML.</p></li>
+<li><p><strong>Query String Parsing &amp; Personalized
+Greeting:</strong> Parse <code>self.path</code> using <a
+href="https://docs.python.org/3/library/urllib.parse.html">urllib.parse.urlparse</a>
+and <a
+href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.parse_qs">urllib.parse.parse_qs</a>.
+If a user accesses
+<code>/usr/&lt;ID&gt;/?name=Sam&amp;theme=dark</code>, greet them by
+name and inject a dark CSS theme dynamically.</p></li>
+<li><p><strong>External API Mashup:</strong> Use Python’s built-in <a
+href="https://docs.python.org/3/library/urllib.request.html">urllib.request</a>
+and <a href="https://docs.python.org/3/library/json.html">json</a>
+libraries inside <code>do_GET</code> to fetch data from an open, keyless
+API and embed it in your response:</p>
+<ul>
+<li>Chuck Norris Jokes:
+<code>&lt;https://api.chucknorris.io/jokes/random&gt;</code></li>
+<li>ISS Current Location:
+<code>&lt;http://api.open-notify.org/iss-now.json&gt;</code></li>
+<li>Public Free APIs Directory: <a
+href="https://github.com/public-apis/public-apis">public-apis GitHub
+repository</a></li>
+</ul></li>
+<li><p><strong>Multi-route Router:</strong> Inspect
+<code>self.path</code>. Return an HTML dashboard on <code>/</code>, a
+dedicated <code>/about</code> page, a JSON status object
+(<code>{"status": "ok", "uptime": ...}</code>) with
+<code>application/json</code> headers on <code>/api/status</code>, and
+an explicit <code>404 Not Found</code> page with a 404 status code
+(<code>self.send_response(404)</code>) for any other route.</p>
+<ul>
+<li>Reference: <a
+href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">MDN HTTP
+Response Status Codes</a></li>
+</ul></li>
+<li><p><strong>File-backed Guestbook (Persistent State):</strong> Global
+variables reset whenever the server restarts. Add an HTML
+<code>&lt;form action="/sign" method="GET"&gt;</code> with a text input.
+When submitted, append the message to a local file
+(<code>guestbook.txt</code>) using standard Python file I/O, read all
+previous entries, and render them as an unordered list
+(<code>&lt;ul&gt;</code>).</p>
+<ul>
+<li>Reference: <a
+href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form">MDN
+HTML Form Basics</a></li>
+</ul></li>
+</ol>
+<blockquote>
+<p>Keep <code>Ctrl+C</code> handy to stop the server between edits, and
+remember to restart it (<code>python3 dynamic_server.py</code>) to see
+your changes — unlike file-based serving, your running Python process
+only reflects code loaded at launch.</p>
+</blockquote>
+<hr />
+<h2 id="wrap-up-questions">Wrap-up questions</h2>
+<ol type="1">
+<li>What HTTP status code did you see when <code>public_html</code> had
+the wrong permissions in Part A, and why?</li>
+<li>Why did running Python’s static server on port 80 require
+<code>sudo</code>, but running <code>dynamic_server.py</code> on port
+8000 did not?</li>
+<li>In your own words: what makes C1’s page “dynamic” when A3/B3’s pages
+are not, given that both are ultimately just HTML sent to a
+browser?</li>
+</ol>
+</body>
+</html>

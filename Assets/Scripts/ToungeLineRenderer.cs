@@ -41,12 +41,18 @@ public class ToungeLineRenderer : MonoBehaviour
         //Tounge mechanism was much easier than I thought
         if (Input.GetMouseButton(0))
         {
+
             point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             lr.SetPosition(0,transform.position);
             lr.SetPosition(1,point);
 
+
+
             CheckToungeCollision();
+
+            FindAnyObjectByType<AudioManager>().PlaySounds("FrogCroak");
+
           
         }
 
@@ -67,6 +73,7 @@ public class ToungeLineRenderer : MonoBehaviour
         Destroy(Ammo.gameObject);
         bulletSpawner.AddBullets();
         ammoText.UpdateAmmo();
+        FindAnyObjectByType<AudioManager>().PlaySounds("AmmoPickup");
 
 
 

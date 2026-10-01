@@ -24,6 +24,7 @@ public class ToungeSpawner : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
                 Instantiate(Tounge_Prefab,transform.position,Quaternion.identity);
+
             
         }
     }

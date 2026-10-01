@@ -11,7 +11,7 @@ public class HungerBarDecriment : MonoBehaviour
 
     public float DamageToHealth;
 
-    bool TurnOfHunger = false;
+    public bool TurnOfHunger = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,7 +55,7 @@ public class HungerBarDecriment : MonoBehaviour
 
             transform.localScale = newSize;
 
-            health.TakeDamage(DamageToHealth);
+            health.TakeDamageOverTime(DamageToHealth);
         }
         }
       

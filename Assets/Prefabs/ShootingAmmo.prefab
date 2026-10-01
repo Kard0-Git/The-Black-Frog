@@ -9,12 +9,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.1469
       objectReference: {fileID: 0}
     - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1333
       objectReference: {fileID: 0}
     - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47,6 +55,22 @@ PrefabInstance:
     - target: {fileID: 867966624486349585, guid: db89ce61f51f5774c967878991cefc50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187267565996092784, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_Size.x
+      value: 1.241177
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187267565996092784, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3502746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187267565996092784, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.028074086
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187267565996092784, guid: db89ce61f51f5774c967878991cefc50, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.055517197
       objectReference: {fileID: 0}
     - target: {fileID: 8486222589473895290, guid: db89ce61f51f5774c967878991cefc50, type: 3}
       propertyPath: m_Sprite
@@ -93,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2247374157200eb45a929693af2da7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoShootingScript
-  ammo_speed: 10
+  ammo_speed: 20
 --- !u!50 &7350439705228882985
 Rigidbody2D:
   serializedVersion: 5

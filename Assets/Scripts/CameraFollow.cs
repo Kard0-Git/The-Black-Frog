@@ -9,7 +9,6 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-       
        CameraFollowPlayer();
     }
 
@@ -23,11 +22,6 @@ public class CameraFollow : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position,TargetPos, ref Velocity, damping);
 
         }
-
-        
-
-
-
 
     }
 

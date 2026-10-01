@@ -12,4 +12,6 @@ public class AmmoShootingScript : MonoBehaviour
     {
         transform.Translate(Vector2.right * ammo_speed * Time.deltaTime);
     }
+
+
 }

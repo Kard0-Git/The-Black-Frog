@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,9 +9,23 @@ public class CheckEnemyAmount : MonoBehaviour
 {
 
 bool AllEnemiesDead = false;
-[SerializeField] private int waves;
+
+SpawnBossEnemy SpawnBoss;
 
 
+public int wave_incriment = 1;
+TMP_Text wave_text;
+
+GameTextHandler Game_UI;
+
+bool UpdateWaveCount = false;
+
+
+void Start()
+    {
+        wave_text = GameObject.Find("WaveText").GetComponent<TMP_Text>();
+        Game_UI = FindAnyObjectByType<GameTextHandler>();
+    }
 void Update()
     {
         
@@ -23,15 +38,40 @@ public void CheckEnemyCount()
         //Go to the next scene when the childcount reaches 0
         if(transform.childCount <= 0)
         {
-           AllEnemiesDead = true;
-           
+          
+            if (!UpdateWaveCount)
+            {
+                UpdateWaveCount = true;
+                UpdateWave();
 
-           SceneManager.LoadScene("Wave one");
-//hello
+            }
+          
         }
-        else 
-        {
-            AllEnemiesDead = false;
-        }
+
+
+    }
+
+
+ void UpdateWave()
+    {
+            wave_incriment++;
+
+            SpawnBoss = FindAnyObjectByType<SpawnBossEnemy>();
+
+
+          wave_text.text = $"Wave: {wave_incriment}";
+
+          wave_text.enabled = true;
+
+         Game_UI.EnableBossText();
+          SpawnBoss.SpawnBoss();
+
+      
+
+      
+
+      
+
+
     }
 }

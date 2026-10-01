@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour
@@ -14,7 +15,7 @@ public class HealthScript : MonoBehaviour
     FrogMovenment frog;
     GameTextHandler Gameoverscreen;
 
- 
+    public float HealthGainPercentage;
 
 // Get the frog script so we can delete it
     void Start()
@@ -25,12 +26,11 @@ public class HealthScript : MonoBehaviour
     }
     void Update()
     {
-        
         HealthAtZero();
     }
 
     //Take damage every couple seconds
-   public float TakeDamage(float damage)
+   public float TakeDamageOverTime(float damage)
     {
         if (!StopDamageTimer)
         {
@@ -48,7 +48,6 @@ public class HealthScript : MonoBehaviour
         }
 
         }
-       
         
         return damage;
     }
@@ -65,9 +64,7 @@ public class HealthScript : MonoBehaviour
             {
               frog.KillPlayer();
               Gameoverscreen.ShowGameOverScreen();
-
             }
-
 
             Vector2 NewHealth = transform.localScale;
 
@@ -77,7 +74,6 @@ public class HealthScript : MonoBehaviour
 // So we stop taking damage when we get to 0
             StopDamageTimer = true;
 
-
         }
     }
 
@@ -86,5 +82,37 @@ public class HealthScript : MonoBehaviour
         StopDamageTimer = true;
     }
 
+   
+   //PowerUp functionality in which we gain a percentage of our total health back when we eat an item
+   public void GainHealth()
+    {
+        Vector2 HealthGained = transform.localScale;
+
+        HealthGained.x += HealthGainPercentage/100 * transform.localScale.x;
+
+        transform.localScale = HealthGained;
+
+        if(transform.localScale.x >= 1)
+        {
+            Vector2 HealthLimit = transform.localScale;
+
+            HealthLimit.x = 1;
+
+            transform.localScale = HealthLimit;
+
+        }
+
+    }
+
+    public float TakeDamageFromEnemy(float dmg)
+    {
+        Vector2 Healthbar = transform.localScale;
+
+        Healthbar.x -= dmg;
+
+        transform.localScale = Healthbar;
+        
+        return dmg;
+    }
     
 }

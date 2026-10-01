@@ -9,6 +9,8 @@ public class FrogMovenment : MonoBehaviour
     public GameObject left,right,ceiling,floor;
     
     Animator animator;
+
+     bool TurnOffMusic = false;
   
 
     public float offset;
@@ -18,13 +20,19 @@ public class FrogMovenment : MonoBehaviour
     void Start()
     {
         animator = FindAnyObjectByType<Animator>();
+
+      
     }
 
     // Update is called once per frame
+
+    
     void Update()
     {
+
         MoveFrog();
         BoundryDetection();
+
        
     }
 
@@ -81,10 +89,10 @@ public class FrogMovenment : MonoBehaviour
         {
             animator.SetBool("IsMoving",false);
         }
-// If we are not moving play idle animation
-       
 
-     
+
+        // If we are not moving play idle animation
+       
     }
 
 
@@ -102,8 +110,10 @@ public class FrogMovenment : MonoBehaviour
   public void KillPlayer()
     {
         Destroy(gameObject);
+    
     }
     
+   
 
     
     

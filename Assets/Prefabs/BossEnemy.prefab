@@ -52,12 +52,13 @@ MonoBehaviour:
   TrackMovenemntTime: 2.5
   MovenmentTimeTickRate: 2.5
   offset: 0
-  ceiling: {x: -12, y: 50}
-  floor: {x: -12, y: -51}
-  Leftwall: {x: -55, y: -36}
-  Rightwall: {x: 55, y: -35}
+  ceiling: {x: -14, y: 60}
+  floor: {x: -12, y: -65}
+  Leftwall: {x: -85, y: -36}
+  Rightwall: {x: 70, y: -35}
   PlayerBulletDmg: 0.01
   BossDamage: 0.3
+  BloodSplatter: {fileID: 3937241005106078587, guid: 29e29005acfc4254cb21ce45f9823741, type: 3}
 --- !u!61 &4331016265818959100
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour
   EnemySpeed: 7
   SmallEnemiesDmg: 0.2
+  BloodSplatterAnimation: {fileID: 6303517110255695304, guid: d01df138409a249468db30678343af42, type: 3}
 --- !u!50 &-1575680221014155323
 Rigidbody2D:
   serializedVersion: 5

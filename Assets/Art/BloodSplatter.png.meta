@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 4948ec6a120e9f74090a2bddc0472aba
+guid: 5b05fdbc57d77f441a8590cb2232f933
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 186361156259027176
-    second: TBFBackground_0
+      213: 6532221654081681961
+    second: BloodSplatter_0
+  - first:
+      213: 3639292250649052659
+    second: BloodSplatter_1
+  - first:
+      213: 3293401116247901493
+    second: BloodSplatter_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,10 +54,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TBFBackground_0
+      name: BloodSplatter_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 2
+        y: 5
+        width: 12
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e810c6fb76169200800000000000000
-      internalID: 186361156259027176
+      spriteID: 92a37a53cfc17aa50800000000000000
+      internalID: 6532221654081681961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloodSplatter_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f5c4c9250d518230800000000000000
+      internalID: 3639292250649052659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloodSplatter_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535c4d4bdd284bd20800000000000000
+      internalID: 3293401116247901493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BloodSplatter_3
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2e45691aa7fd5b4f8f354a3b4d0e57d
+      internalID: -1760460884
       vertices: []
       indices: 
       edges: []
@@ -138,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 2189282e56d52324ba5f2abb850b1c4c
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +220,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TBFBackground_0: 186361156259027176
+      BloodSplatter_0: 6532221654081681961
+      BloodSplatter_1: 3639292250649052659
+      BloodSplatter_2: 3293401116247901493
+      BloodSplatter_3: -1760460884
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

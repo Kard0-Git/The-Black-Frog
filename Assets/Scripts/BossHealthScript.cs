@@ -26,7 +26,7 @@ public float SpeedIncreaseAmount;
         BossAI = FindAnyObjectByType<WaveOneBossAi>();
 
 
-        if(transform.localScale.x <= 1.8f)
+        if(transform.localScale.x <= 1.6f)
         {
             if (!AllowSpeedIncrease)
             {

@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,6 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
 
    public float SmallEnemiesDmg;
 
+   public GameObject BloodSplatterAnimation;
+
+   
   
 void Start()
     {
@@ -44,6 +48,10 @@ void Start()
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            GameObject BloodObject = Instantiate(BloodSplatterAnimation,transform.position,quaternion.identity);
+            Destroy(BloodObject,0.5f);
+          
+
             FindAnyObjectByType<AudioManager>().PlaySounds("EnemyDeath");
 
         }

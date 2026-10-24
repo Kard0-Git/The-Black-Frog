@@ -47,13 +47,10 @@ public class ToungeLineRenderer : MonoBehaviour
             lr.SetPosition(0,transform.position);
             lr.SetPosition(1,point);
 
-
-
             CheckToungeCollision();
 
             FindAnyObjectByType<AudioManager>().PlaySounds("FrogCroak");
 
-          
         }
 
         Destroy(gameObject,LineDeletionTime);
@@ -76,8 +73,6 @@ public class ToungeLineRenderer : MonoBehaviour
         FindAnyObjectByType<AudioManager>().PlaySounds("AmmoPickup");
 
 
-
-            
         }
 
      

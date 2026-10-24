@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class WaveOneBossAi : MonoBehaviour
     HealthScript frogHealth;
     public float offset;
     public Vector2 ceiling, floor,Leftwall,Rightwall;
-    bool StopMoving = false;
+
     bool IsBossHit = false;
     bool PlayBossMusic = false;
     public float PlayerBulletDmg;
@@ -30,6 +31,10 @@ public class WaveOneBossAi : MonoBehaviour
     bool PlayMosquitoWingSound = false;
 
     Animator BossAnimations;
+
+    public GameObject BloodSplatter;
+
+   
 
 
   void Start()
@@ -49,7 +54,7 @@ public class WaveOneBossAi : MonoBehaviour
 
    void MoveEnemny()
     {
-             countdown -= Time.deltaTime;
+        countdown -= Time.deltaTime;
 
         if(countdown <= 0)
         {
@@ -94,10 +99,6 @@ public class WaveOneBossAi : MonoBehaviour
 
     }
  
-     void StopBossMovenment()
-    {
-        StopMoving = true;
-    }
 
    //Collision Detection for when the boss gets hit, flag so it checks once when the boss is hit
 void OnCollisionEnter2D(Collision2D collision)
@@ -107,6 +108,8 @@ void OnCollisionEnter2D(Collision2D collision)
         {
             BossHealth = FindAnyObjectByType<BossHealthScript>();
             Destroy(collision.gameObject);
+            GameObject BloodAnimation = Instantiate(BloodSplatter,transform.position,quaternion.identity);
+            Destroy(BloodAnimation, 0.5f);            
 
             if (!IsBossHit)
             {
@@ -135,6 +138,7 @@ void OnCollisionEnter2D(Collision2D collision)
             }
             else
             {
+                // so that the player can be hit multiple times
                 IsPlayerHit = false;
             }
 
@@ -148,6 +152,7 @@ void OnCollisionEnter2D(Collision2D collision)
 
     void BossConstraints()
     {
+        //Clamp so the boss dosent fly off the screen
 
         Vector3 Barrier = transform.position;
 

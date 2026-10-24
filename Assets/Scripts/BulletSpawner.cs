@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class BulletSpawner : MonoBehaviour
 {
-  public float cooldown;
+    private static readonly int IsPuffedUpHash = Animator.StringToHash("IsPuffedUp");
+    private static readonly int IsEatingHash = Animator.StringToHash("IsEating");
+    public float cooldown;
 
  public float lastShotFired;
 
@@ -38,8 +40,6 @@ public class BulletSpawner : MonoBehaviour
         animator = FindAnyObjectByType<Animator>();
     }
 
-
-//spawn a bullet only when
     void Update()
     {
 
@@ -49,17 +49,23 @@ public class BulletSpawner : MonoBehaviour
 
         }
 
+//Eat a bullet when the user presses E
         if (Input.GetKeyDown(KeyCode.E))
         {
 
             EatBullets();
-
-
+            animator.SetBool(IsPuffedUpHash,false);
+            
         }
-
+// stop running animation when the key is released
         if (Input.GetKeyUp(KeyCode.E))
         {
             animator.SetBool("IsEating",false);
+
+            
+            animator.SetBool("IsPuffedUp",true);
+         
+
         }
     }
 
@@ -67,6 +73,7 @@ public class BulletSpawner : MonoBehaviour
     public void AddBullets()
     {
         AmmoCollection.Add(Bullet);
+        animator.SetBool("IsPuffedUp",true);
     }
 //SpawnBullets if there are bullets in our array and only if the RMB is pressed
     public void SpawnBullets()
@@ -77,24 +84,31 @@ public class BulletSpawner : MonoBehaviour
             return;
         }
 
+ // spawn a bullet for each bullet in the list
        if(CheckforRange == false)
         {
           lastShotFired = Time.time;
              for(int i = 0; i<AmmoCollection.Count; i++)
         {
             Instantiate(AmmoCollection[i],transform.position,transform.rotation,BulletsFired);
+            
         }
        
+       //Every time we shoot a bullet, remove the last bullet in the array
         AmmoCollection.RemoveAt(AmmoCollection.Count - 1);
+        // display it on screen
         ammoText.DecrimentAmmo();
+        //Play the sound clip
         FindAnyObjectByType<AudioManager>().PlaySounds("ShootBin");
 
 
         }
 
+// if we have no bullets in the array, stop spawning them
         if(AmmoCollection.Count <= 0)
         {
             CheckforRange = true;
+            animator.SetBool("IsPuffedUp",false);
           
 
         } else
@@ -102,23 +116,22 @@ public class BulletSpawner : MonoBehaviour
             CheckforRange = false;
         }
 
-
-       
-        // remove bullets from the array once spawned so that you effectively run out of bullets to shoot
-
     }
 
  void EatBullets()
     {
+        // remove bullets fron the array and fill hunger bar when we have eaten one
        if(CheckforRange == false)
         {
          AmmoCollection.RemoveAt(AmmoCollection.Count - 1 );
          ammoText.DecrimentAmmo();
          hungerBar.RefillHunger();
          FindAnyObjectByType<AudioManager>().PlaySounds("ChewingAmmo");
-         animator.SetBool("IsEating",true);
+         animator.SetBool(IsEatingHash,true);
 
+         
 
+// Gain health upgrade logic
          AddOnHealth = FindAnyObjectByType<HealthScript>();
 
          Upgrades = FindAnyObjectByType<UpgradeHandler>();
@@ -127,13 +140,13 @@ public class BulletSpawner : MonoBehaviour
    
         }
 
- 
+ // check again if we are out of bullets. If so do not spawn
         if(AmmoCollection.Count <= 0)
         {
             CheckforRange = true;
 
           
-
+// otherwise allow us to shoot ammo
         } else
         {
             CheckforRange = false;
@@ -143,5 +156,5 @@ public class BulletSpawner : MonoBehaviour
         
     }
 
-    
+
 }
